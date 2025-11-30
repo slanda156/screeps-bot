@@ -9,7 +9,7 @@ var roleTransporter = {
 	        creep.memory.empty = false;
 	    }
 	    if(creep.memory.empty) {
-            storage = Game.getObjectById("6027bf456618fd27008ec888");
+            storage = Game.getObjectById("3207edcc9f68a9a");
             if(creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(storage);
             }

@@ -22,17 +22,17 @@ var Healer          = 0
 var Repairer        = 1
 var Worker          = 0
 
-var tower = Game.getObjectById("602416bf31c5a73659d7335b");
+var tower = Game.getObjectById("f2c5221e56c9573");
 
 // Game.market.deal("60cdf51dbd2c46860d59d8ff", 3829, "E58S31");
 module.exports.loop = function () {
-    // if(turrets) {
-    //     var targets
-    //     targets = tower.room.find(FIND_HOSTILE_CREEPS);
-    //     if(targets[0]) {
-    //         tower.attack(targets[0]);
-    //     }
-    // }
+    if(turrets) {
+        var targets
+        targets = tower.room.find(FIND_HOSTILE_CREEPS);
+        if(targets[0]) {
+            tower.attack(targets[0]);
+        }
+    }
 
     var needs = Game.spawns.Spawn1.room.find(FIND_MY_CREEPS, {
             filter: function(object) {return object.hits < object.hitsMax;}});
@@ -49,14 +49,14 @@ module.exports.loop = function () {
     if(Log) {
         console.log("Available Energy: " + energy_net)
     }
-
+    
     if(energy_net <= 400){
         Harvester = 1;
     }
     else {
         Harvester = 0;
     }
-
+    
     var i = (energy_net - 300) / 250
     if(i > 9){
         i = 9;
@@ -81,7 +81,7 @@ module.exports.loop = function () {
     }
 
     var mineral = Game.getObjectById("47af6164d20e3a3");
-
+    
     // Terminal = Game.getObjectById("6058001ab84fa6de2a043ebb");
     //if(Terminal.store.getUsedCapacity(mineral.mineralType) < 100000){
     //    Mineral_Miner = 1;
@@ -89,7 +89,7 @@ module.exports.loop = function () {
     if(mineral.mineralAmount <= 0){
         Mineral_Miner = 0;
     }
-
+    
     var deals = Game.market.getAllOrders({type: ORDER_BUY, resourceType: mineral.mineralType});
     var maxPrice = 0;
     for (let i = 0; i < deals.length; i++) {
@@ -97,7 +97,7 @@ module.exports.loop = function () {
             maxPrice = deals[i].price
         }
     }
-
+    
     for (let i = 0; i < deals.length; i++) {
         if(deals[i].price == maxPrice) {
             if(Game.market.deal(deals[i].id, deals[i].remainingAmount, "E58S31") == 0) {
@@ -116,7 +116,7 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
-
+    
     var upgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     var builder = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');;
     var harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
