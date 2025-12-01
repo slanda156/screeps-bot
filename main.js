@@ -62,12 +62,13 @@ module.exports.loop = function () {
         i = 9;
     }
     if(i >= 3){
-        corpse.push(CARRY, CARRY, MOVE)
+        corpse.push(CARRY, CARRY, MOVE);
+        i -= 1;
     }
     while(i >= 1) {
-        i -= 1
-        corpse.push(WORK, WORK, MOVE)
-        minerCorpse.push(WORK, WORK, WORK)
+        i -= 1;
+        corpse.push(WORK, WORK, MOVE);
+        minerCorpse.push(WORK, WORK, WORK);
     }
 
     if(Log) {
